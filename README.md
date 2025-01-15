@@ -18,18 +18,21 @@ OneID JWT auth sdk for python
 1. 初始化配置：
 - 私钥以String形式提供
 ```python
-jwt_signer = oneid_auth.Signer(private_key, issuer, login_url)
+jwt_signer = oneid_auth.Signer(private_key, issuer, login_base_url)
 ```
 - 私钥以文件形式提供
 ```python
-jwt_signer = oneid_auth.Signer.new_signer_from_key_file(key_file_path, issuer, login_url)
+jwt_signer = oneid_auth.Signer.new_signer_from_key_file(key_file_path, issuer, login_base_url)
 ```
 2. 生成免登url：
 - 通过用户信息UserInfo生成(UserInfo中user_id和name为必传字段，username、email、mobile三个属性至少存在一个)
 
 ```python
-user_info = oneid_auth.UserInfo("user_id_123", "jinrruan", email="jinrruan@qq.com")
+user_info = oneid_auth.UserInfo("f99530d4-8317-4900-bd02-0127bb8c44de", "张三",
+                                username="zhangsan",
+                                email="zhangsan@example.com",
+                                mobile="+86 13411112222")
 
 login_url = jwt_signer.new_login_url(user_info, oneid_auth.App_Tencent_Meeting,
-                                     params={"name": "1+2", "age": 18, "email": "123@qq.com"})
+                                     params={"meeting_common": "https://meeting.tencent.com"})
 ```
