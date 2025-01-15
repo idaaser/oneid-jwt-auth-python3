@@ -26,9 +26,10 @@ jwt_signer = oneid_auth.Signer.new_signer_from_key_file(key_file_path, issuer, l
 ```
 2. 生成免登url：
 - 通过用户信息UserInfo生成(UserInfo中user_id和name为必传字段，username、email、mobile三个属性至少存在一个)
+
 ```python
 user_info = oneid_auth.UserInfo("user_id_123", "jinrruan", email="jinrruan@qq.com")
 
-login_url = jwt_signer.generate_login_url(user_info, oneid_auth.App_Tencent_Meeting, 
-                                          params={"name": "1+2", "age": 18, "email": "123@qq.com"})
+login_url = jwt_signer.new_login_url(user_info, oneid_auth.App_Tencent_Meeting,
+                                     params={"name": "1+2", "age": 18, "email": "123@qq.com"})
 ```
